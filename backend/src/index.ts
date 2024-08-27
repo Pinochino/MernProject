@@ -33,6 +33,15 @@ app.get('/news', (req: Request, res: Response) => {
   res.render('news');
 });
 
+app.get('/search', (req: Request, res: Response) => {
+  console.log(req.query.q);
+  res.render('search');
+});
+
+// app.post('/search', (req: Request, res: Response) => {
+//   res.render('search');
+// });
+
 app.listen(port, () => {
   console.log('Server is running on port 3000');
 });

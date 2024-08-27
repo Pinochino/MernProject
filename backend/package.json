@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "nodemon  src/index.ts",
+    "start": "nodemon  ",
     "watch": "node-sass --watch src/resource/scss/ --output src/public/css/"
   },
   "dependencies": {
