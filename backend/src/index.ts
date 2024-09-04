@@ -7,9 +7,9 @@ import path from 'path';
 const port = 3000;
 const app = express();
 
-
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Http Logger
 app.use(morgan('dev'));
@@ -23,7 +23,6 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resource/views'));
 
 console.log(path.join(__dirname, 'resources/views'));
-
 
 app.get('/', (req: Request, res: Response) => {
   res.render('home');
