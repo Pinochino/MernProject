@@ -1,7 +1,16 @@
 {
   "scripts": {
+    "beautiful": "lint-staged",
     "start": "nodemon  ",
     "watch": "node-sass --watch src/resource/scss/ --output src/public/css/"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,js,json,scss}": "prettier --write --single-quote --trailing-comma all --tab-width 4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "dependencies": {
     "express": "^4.19.2",
@@ -12,8 +21,11 @@
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/morgan": "^1.9.9",
+    "husky": "^9.1.5",
+    "lint-staged": "^15.2.10",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.4",
+    "prettier": "^3.3.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   }

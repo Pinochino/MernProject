@@ -1,7 +1,10 @@
-import {ObjectId} from 'mongodb';
+import { ObjectId } from 'mongodb';
 
 class Game {
-    constructor(public name: string, public price: number, public category: string, public id?: ObjectId) {
-        
-    }
+    constructor(
+        public name: string,
+        public price: number,
+        public category: string,
+        public id?: ObjectId,
+    ) {}
 }
