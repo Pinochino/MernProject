@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Course from '../../model/course';
+import Course from '../../model/Course';
 const {multipleMongooseToObject} = require('../../utils/mongoose')
 
 class SiteController {

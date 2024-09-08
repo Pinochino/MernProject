@@ -2,10 +2,15 @@ import mongoose from 'mongoose';
 
 async function connectDb() {
     try {
-        await mongoose.connect('mongodb://127.0.0.1/f8_education_dev');
-        console.log('Connect successfully')
+        if (mongoose.connection.readyState === 0) {
+            await mongoose.connect('mongodb://127.0.0.1:27017/f8_education_dev');
+        
+            console.log('Connect successfully')
+        } else {
+            console.log('MongoDB is already connected');
+          }
     } catch (error) {
-        console.log('Connect failed')
+       console.log('Error: ', {error});
     }
 }
 

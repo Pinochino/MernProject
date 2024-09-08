@@ -1,10 +1,9 @@
 import { Document } from "mongoose";
 
-module.exports = {
-    multipleMongooseToObject: function (mongooses: Document[]){
+   export function multipleMongooseToObject (mongooses: Document[]){
         return mongooses.map(mongoose => mongoose.toObject())
-    }, 
-    mongooseToObject: function (mongoose: Document){
+    }
+    
+    export function mongooseToObject (mongoose: Document){
         return mongoose ? mongoose.toObject() : mongoose;
     }
-}

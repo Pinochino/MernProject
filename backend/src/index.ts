@@ -8,6 +8,11 @@ import connectDb from './config/db';
 const port = 3000;
 const app = express();
 
+// Method-override
+var methodOverride = require('method-override');
+app.use(methodOverride('_method'))
+
+
 // Connect to database
 connectDb();
 
@@ -30,6 +35,10 @@ app.engine(
   'hbs',
   engine({
     extname: '.hbs',
+    helpers: {
+      sum: (a: number, b: number) =>  a + b,
+      
+  }
   }),
 );
 

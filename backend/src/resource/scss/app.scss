@@ -3,3 +3,12 @@
 .card-course-item{
     margin-top: 5rem;
 }
+.user-avatar{
+    width: 25px;
+    height: 25px; 
+    border-radius: 50%;  
+}
+.navbar-collapse {
+     flex-grow: 0 ;
+    align-items: unset !important;
+}
