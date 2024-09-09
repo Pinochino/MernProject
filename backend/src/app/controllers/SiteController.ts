@@ -1,10 +1,10 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import Course from '../../model/Course';
 const {multipleMongooseToObject} = require('../../utils/mongoose')
 
 class SiteController {
     // [GET] /
-    async home(req: Request, res: Response, next: any) {
+    async home(req: Request, res: Response, next: NextFunction) {
         // res.render('home');
         // try {
         //     const courses = await getCourses();

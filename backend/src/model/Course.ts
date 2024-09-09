@@ -1,7 +1,9 @@
-import mongoose, { connect, model, Schema } from "mongoose";
+import mongoose, { connect, model, Schema, Document } from "mongoose";
+// const slug = require('mongoose-slug-generator');
+import mongooseDelete, { SoftDeleteModel } from 'mongoose-delete';
 
-// Interface for Course
-interface ICourse {
+// Interface for Course, extending from Document
+interface ICourse extends Document {
     title: string;
     description: string;
     image?: string;
@@ -15,7 +17,7 @@ interface ICourse {
 
 // Course Schema
 const courseSchema = new Schema<ICourse>({
-    title: { type: String, maxLength: 255, required: true }, 
+    title: { type: String, maxLength: 255, required: true },
     description: { type: String, maxLength: 600 },
     image: { type: String, maxLength: 255 },
     videoId: { type: String, maxLength: 255 },
@@ -26,33 +28,11 @@ const courseSchema = new Schema<ICourse>({
     updatedAt: { type: Date, default: Date.now },
 }, { versionKey: false });
 
-// Create Model
-const Course = model<ICourse>('Course', courseSchema);
+// Add plugins
+// mongoose.plugin(slug);
+courseSchema.plugin(mongooseDelete, { deletedAt: true, overrideMethods: 'all', deletedBy: true, deletedByType: String });
 
-// Connect to MongoDB and run example code
-// async function run() {
-//     try {
-//         await connect('mongodb://127.0.0.1:27017/f8_education_dev');
-//         console.log('MongoDB connected');
-
-//         // Example usage
-//         // const course = new Course({
-//         //     title: 'Lập trình C++ cơ bản, nâng cao',
-//         //     description: 'Khóa học lập trình C++ từ cơ bản tới nâng cao dành cho người mới bắt đầu...',
-//         //     image: 'https://files.fullstack.edu.vn/f8-prod/courses/21/63e1bcbaed1dd.png',
-//         //     slug: 'C++',
-//         //     price: '35200',
-//         //     level: 'Mức độ nâng cao',
-//         //     videoId: 'ENjrJ_zyeUc'
-//         // });
-
-//         // await course.save();
-//         // console.log(course.title);
-//     } catch (err) {
-//         console.error('Error connecting to MongoDB:', err);
-//     }
-// }
-
-// run();
+// Create Model using SoftDeleteModel with proper typing
+const Course = model<ICourse, SoftDeleteModel<ICourse>>('Course', courseSchema);
 
 export default Course;

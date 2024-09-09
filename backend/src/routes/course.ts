@@ -10,5 +10,7 @@ route.get('/:id/edit', courseController.edit);
 route.get('/:slug', courseController.show);
 route.put('/:id', courseController.update);
 route.delete('/:id', courseController.delete);
+route.delete('/:id/force', courseController.forceDelete);
+route.patch('/:id/restore', courseController.restore);
 
 export default route;
