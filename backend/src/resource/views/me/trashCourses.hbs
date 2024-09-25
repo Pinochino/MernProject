@@ -12,23 +12,24 @@
                 <th scope="col">#</th>
                 <th scope="col">Tên khóa học</th>
                 <th scope="col">Trình độ</th>
-                <th scope="col">Thời gian tạo</th>
-                <th scope="col"></th>
+                <th scope="col">Thời gian xóa</th>
             </tr>
         </thead>
         <tbody>
             {{#each courses}}
+            {{#if deleted}}
             <tr>
                 <th scope="row">{{sum @index 1}}</th>
                 <td>{{this.title}}</td>
                 <td>{{this.level}}</td>
-                <td>{{this.createdAt}}</td>
-                <td>
+                <td>{{this.deletedAt}}</td>
+                <td colspan="5">
                     <a href="" class="btn btn-outline-info btn-restore" data-bs-id="{{this._id}}">Khôi phục</a>
                     <a href="" class="btn btn-outline-danger" data-bs-id="{{this._id}}" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">Xóa vĩnh viễn</a>
                 </td>
             </tr>
+            {{/if}}
             {{else}}
             <td>
             <td colspan="5" class="text-center">Thùng rác trống
@@ -36,6 +37,7 @@
             </td>
             </td>
             {{/each}}
+            
         </tbody>
     </table>
 </div>
@@ -59,7 +61,6 @@
     </div>
 </div>
 
-{{!-- DELETED HIDDEN FORM --}}
 <form method="post" name="delete-course-form"></form>
 <form method="post" name="restore-course-form"></form>
 
@@ -78,6 +79,9 @@
         const exampleModal = qs('#exampleModal');
         const deleteBtn = qs('#delete');
         const restoreBtn = $('.btn-restore');
+        let courseId;
+        let deleteForm = document.forms['delete-course-form'];
+        let restoreForm = document.forms['restore-course-form'];
 
         // Restore btn clicked
         restoreBtn.click(function (event) {
@@ -85,11 +89,9 @@
             const courseId = $(this).data('bs-id');
             restoreForm.action = '/courses/' + courseId + '/restore?_method=PATCH';
             restoreForm.submit();
-        })
 
-        let courseId;
-        let deleteForm = document.forms['delete-course-form'];
-        let restoreForm = document.forms['restore-course-form'];
+        });
+
 
 
         if (exampleModal) {

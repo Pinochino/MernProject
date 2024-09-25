@@ -83,15 +83,5 @@ class CourseController {
 
 
 
-// async function getCourses() {
-//     try {
-//         const courses = await Course.find();
-//         return courses;
-//     } catch (error) {
-//          throw new Error(`Error: ${error}`)
-//     }
-// }
-
-
 
 export default CourseController;

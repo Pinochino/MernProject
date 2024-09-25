@@ -37,7 +37,13 @@ app.engine(
     extname: '.hbs',
     helpers: {
       sum: (a: number, b: number) =>  a + b,
-      
+      comparison: (value: number, options: Handlebars.HelperOptions) =>{
+        if (value  > 0) {
+          return options.fn(this);
+        } else {
+          return options.inverse(this);
+        }
+      } 
   }
   }),
 );
