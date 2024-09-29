@@ -2,12 +2,13 @@ import { NextFunction, Request, Response } from 'express';
 import Course from '../../model/Course';
 import { multipleMongooseToObject } from '../../utils/mongoose';
 
+
 class MeController {
 
     // [GET] /me/stored/courses
     storedCourses(req: Request, res: Response, next: NextFunction) {
 
-        Promise.all([Course.find({}), Course.countDocumentsDeleted()])
+        Promise.all([Course.find({}), Course.countDocumentsWithDeleted({deleted: true})])
             .then(([courses, deletedCount]) =>
                 res.render('me/storedCourses', {
                     deletedCount,

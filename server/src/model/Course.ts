@@ -1,9 +1,9 @@
 import mongoose, { connect, model, Schema, Document } from "mongoose";
 // const slug = require('mongoose-slug-generator');
-import mongooseDelete, { SoftDeleteModel } from 'mongoose-delete';
+import mongooseDelete, { SoftDeleteDocument, SoftDeleteModel } from 'mongoose-delete';
 
 // Interface for Course, extending from Document
-interface ICourse extends Document {
+interface ICourse extends SoftDeleteDocument {
     title: string;
     description: string;
     image?: string;
@@ -30,7 +30,7 @@ const courseSchema = new Schema<ICourse>({
 
 // Add plugins
 // mongoose.plugin(slug);
-courseSchema.plugin(mongooseDelete, { deletedAt: true, overrideMethods: 'all', deletedBy: true, deletedByType: String });
+courseSchema.plugin(mongooseDelete, { deletedAt: true, overrideMethods: 'all' });
 
 // Create Model using SoftDeleteModel with proper typing
 const Course = model<ICourse, SoftDeleteModel<ICourse>>('Course', courseSchema);
